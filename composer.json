@@ -1,0 +1,16 @@
+{
+    "name": "hexlet/code",
+    "description": "2nd project",
+    "type": "project",
+    "bin": [
+        "bin/gendiff"
+    ],
+    "authors": [
+        {
+            "name": "Alexandr Konishchev"
+        }
+    ],
+    "require": {
+        "docopt/docopt": "^1.0"
+    }
+}
