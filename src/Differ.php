@@ -59,7 +59,7 @@ function compare($file1, $file2)
       
     }
   $result = implode("\n", $result);
-  return $result;   
+  return "{\n" . $result ."}\n";
 }
 
 function genDiff($file1, $file2)
