@@ -2,40 +2,28 @@
 
 namespace Differ\Differ;
 
-function readFile(string $pathToFile)
-{
-    $fileInfo = file_get_contents($pathToFile);
-    return $fileInfo;
-}
-
-function getDecodeJson(string $pathToFile)
-{
-    $jsonString = readfile($pathToFile);
-    $jsonArray = json_decode($jsonString, true);
-    return $jsonArray;
-}
+use function Differ\Parser\parse;
 
 function boolToString($boolValue)
 {
   return $boolValue ? 'true' : 'false';
 }
 
+function arrayBoolsToString(array $array)
+{
+  foreach($array as $key=>$values) {
+    if(is_bool($values)) {
+    $values = boolToString($values);
+    $array[$key] = $values;
+    }
+  }
+  return $array;
+}
+
 function compare($file1, $file2)
 {
-    $arrayFile1 = getDecodeJson($file1);
-    $arrayFile2 = getDecodeJson($file2);
-  foreach ($arrayFile2 as $key=>$values) {
-    if(is_bool($values)) {
-    $values = boolToString($values);
-    $arrayFile2[$key] = $values;
-    }
-  }
-  foreach ($arrayFile1 as $key=>$values) {
-    if(is_bool($values)) {
-    $values = boolToString($values);
-    $arrayFile1[$key] = $values;
-    }
-  }
+    $arrayFile1 = arrayBoolsToString(parse($file1));
+    $arrayFile2 = arrayBoolsToString(parse($file2)); 
     $file1Keys = array_keys($arrayFile1);
     $file2Keys = array_keys($arrayFile2);
     $keys = array_unique(array_merge($file1Keys, $file2Keys));
@@ -59,7 +47,7 @@ function compare($file1, $file2)
       
     }
   $result = implode("\n", $result);
-  return "{\n" . $result ."}\n";
+  return   "{\n" . $result ."}\n";
 }
 
 function genDiff($file1, $file2)
