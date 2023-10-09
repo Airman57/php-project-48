@@ -19,10 +19,11 @@ function yamlToArray(string $pathToFile)
 
 function parse(string $pathToFile)
 {
-    if(str_contains($pathToFile, 'json')) {
-        return jsonToArray($pathToFile);
-    }
-    elseif(str_contains($pathToFile, 'yml') || str_contains($pathToFile, 'yaml')) {
-        return yamlToArray($pathToFile);
-    }
+    $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
+    $resultArray = match ($extension) {
+        'json' => jsonToArray($pathToFile),
+        'yaml' => yamlToArray($pathToFile),
+        'yml' => yamlToArray($pathToFile),
+    };
+    return $resultArray;
 }

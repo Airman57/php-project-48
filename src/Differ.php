@@ -20,29 +20,27 @@ function arrayBoolsToString(array $array)
   return $array;
 }
 
-function compare($file1, $file2)
+function compare(array $file1, array $file2)
 {
-    $arrayFile1 = arrayBoolsToString(parse($file1));
-    $arrayFile2 = arrayBoolsToString(parse($file2)); 
-    $file1Keys = array_keys($arrayFile1);
-    $file2Keys = array_keys($arrayFile2);
+    $file1Keys = array_keys($file1);
+    $file2Keys = array_keys($file2);
     $keys = array_unique(array_merge($file1Keys, $file2Keys));
     sort($keys);
     $result = [];
     //var_dump($keys);
     foreach ($keys as $key) {
-      if(!array_key_exists($key, $arrayFile1)) {
-        $result[] = "+" . " {$key}: " . "{$arrayFile2[$key]}\n";
+      if(!array_key_exists($key, $file1)) {
+        $result[] = "+" . " {$key}: " . "{$file2[$key]}\n";
       }
-      elseif(!array_key_exists($key, $arrayFile2)) {
-        $result[] = "-" . " {$key}: " . "{$arrayFile1[$key]}";
+      elseif(!array_key_exists($key, $file2)) {
+        $result[] = "-" . " {$key}: " . "{$file1[$key]}";
       }
-      elseif($arrayFile1[$key] === $arrayFile2[$key]) {
-        $result[] = " " . " {$key}: " . "{$arrayFile1[$key]}";
+      elseif($file1[$key] === $file2[$key]) {
+        $result[] = " " . " {$key}: " . "{$file1[$key]}";
       }
-      elseif($arrayFile1[$key] !== $arrayFile2[$key]) {
-        $result[] = "-" . " {$key}: " . "{$arrayFile1[$key]}\n"
-                  . "+" . " {$key}: " . "{$arrayFile2[$key]}";
+      elseif($file1[$key] !== $file2[$key]) {
+        $result[] = "-" . " {$key}: " . "{$file1[$key]}\n"
+                  . "+" . " {$key}: " . "{$file2[$key]}";
       }
       
     }
@@ -50,7 +48,11 @@ function compare($file1, $file2)
   return   "{\n" . $result ."}\n";
 }
 
-function genDiff($file1, $file2)
+function genDiff(string $file1, string $file2)
 {
-    return compare($file1, $file2);
+  $file1Array = parse($file1);
+  $file2Array = parse($file2);  
+  return compare($file1Array, $file2Array);
 }
+
+//php match
