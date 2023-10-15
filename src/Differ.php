@@ -2,57 +2,62 @@
 
 namespace Differ\Differ;
 
+use function Functional\sort;
 use function Differ\Parser\parse;
-
-function boolToString($boolValue)
-{
-  return $boolValue ? 'true' : 'false';
-}
-
-function arrayBoolsToString(array $array)
-{
-  foreach($array as $key=>$values) {
-    if(is_bool($values)) {
-    $values = boolToString($values);
-    $array[$key] = $values;
-    }
-  }
-  return $array;
-}
+use function Differ\Formatters\showStylish;
+use function Differ\Formatters\toStylish;
 
 function compare(array $file1, array $file2)
 {
     $file1Keys = array_keys($file1);
     $file2Keys = array_keys($file2);
     $keys = array_unique(array_merge($file1Keys, $file2Keys));
-    sort($keys);
-    $result = [];
-    //var_dump($keys);
-    foreach ($keys as $key) {
-      if(!array_key_exists($key, $file1)) {
-        $result[] = "+" . " {$key}: " . "{$file2[$key]}\n";
+    $sortedKeys = sort($keys, fn($x, $y) => strcmp($x, $y));
+    //sort($keys);
+    $result = array_map(function ($key) use ($file1, $file2) {
+      if (!array_key_exists($key, $file1)) {
+          return [
+              'key' => $key,
+              'condition' => 'added',
+              'value' => $file2[$key]
+          ];
+      } elseif (!array_key_exists($key, $file2)) {
+          return [
+              'key' => $key,
+              'condition' => 'removed',
+              'value' => $file1[$key]
+          ];
+      } elseif (is_array($file1[$key]) && is_array($file2[$key])) {
+          return [
+              'key' => $key,
+              'condition' => 'array',
+              'children' => compare($file1[$key], $file2[$key])
+          ];
+      } elseif ($file1[$key] !== $file2[$key]) {
+          return [
+              'key' => $key,
+              'condition' => 'changed',
+              'oldValue' => $file1[$key],
+              'newValue' => $file2[$key],
+          ];
+      } else {
+          return [
+              'key' => $key,
+              'condition' => 'unchanged',
+              'value' => $file1[$key]
+          ];
       }
-      elseif(!array_key_exists($key, $file2)) {
-        $result[] = "-" . " {$key}: " . "{$file1[$key]}";
-      }
-      elseif($file1[$key] === $file2[$key]) {
-        $result[] = " " . " {$key}: " . "{$file1[$key]}";
-      }
-      elseif($file1[$key] !== $file2[$key]) {
-        $result[] = "-" . " {$key}: " . "{$file1[$key]}\n"
-                  . "+" . " {$key}: " . "{$file2[$key]}";
-      }
-      
-    }
-  $result = implode("\n", $result);
-  return   "{\n" . $result ."}\n";
+  }, $sortedKeys);
+  return $result;
 }
+
 
 function genDiff(string $file1, string $file2)
 {
   $file1Array = parse($file1);
   $file2Array = parse($file2);  
-  return compare($file1Array, $file2Array);
+  $difference = compare($file1Array, $file2Array);
+  return showStylish($difference);
 }
 
 //php match

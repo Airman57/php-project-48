@@ -9,7 +9,8 @@
         "files":[ 
         "src/Differ.php",
         "tests/genDiffTests.php",
-        "src/Parser.php"   
+        "src/Parser.php",
+        "src/Formatters/stylish.php"   
     ]        
 },
     "authors": [
