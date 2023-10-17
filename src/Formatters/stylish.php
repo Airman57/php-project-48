@@ -25,7 +25,7 @@ function toString(array $comparison)
     return $result;
 }
 
-function formatValue(mixed $value, $depth = 1)
+function formatValue(mixed $value, int $depth = 1)
 {
     if (!is_array($value)) {
         return $value;
@@ -39,7 +39,7 @@ function formatValue(mixed $value, $depth = 1)
     return "{\n" . implode("\n", $result) . "\n" . $gap . "}";
 }
 
-function toStylish(array $comparison, $depth = 0)
+function toStylish(array $comparison, int $depth = 0)
 {
     $newcomparison = toString($comparison);
     $gap = str_repeat('    ', $depth);

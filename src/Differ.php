@@ -50,7 +50,7 @@ function compare(array $file1, array $file2)
 }
 
 
-function genDiff(string $file1, string $file2, $format = 'stylish')
+function genDiff(string $file1, string $file2, string $format = 'stylish')
 {
     $file1Array = parse($file1);
     $file2Array = parse($file2);

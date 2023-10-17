@@ -7,7 +7,7 @@ use Symfony\Component\Yaml\Yaml;
 function jsonToArray(string $pathToFile)
 {
     $jsonString = file_get_contents($pathToFile);
-    $jsonArray = json_decode($jsonString, true);
+    $jsonArray = json_decode((string) $jsonString, true);
     return $jsonArray;
 }
 
@@ -20,7 +20,7 @@ function yamlToArray(string $pathToFile)
 function parse(string $pathToFile)
 {
     $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
-    $resultArray = match ($extension) {
+    $resultArray = match ((string) $extension) {
         'json' => jsonToArray($pathToFile),
         'yaml' => yamlToArray($pathToFile),
         'yml' => yamlToArray($pathToFile),
