@@ -1,5 +1,25 @@
 [![Actions Status](https://github.com/Airman57/php-project-48/workflows/hexlet-check/badge.svg)](https://github.com/Airman57/php-project-48/actions)
 [![AlexandrKonishchevActionTests](https://github.com/Airman57/php-project-48/actions/workflows/lintAndTest.yml/badge.svg)](https://github.com/Airman57/php-project-48/actions/workflows/lintAndTest.yml)
 <a href="https://codeclimate.com/github/Airman57/php-project-48/maintainability"><img src="https://api.codeclimate.com/v1/badges/92374ff88d2faaed58d6/maintainability" /></a>
-<a href="https://asciinema.org/a/6u1Lec10CRGFqnXLDsfZ6S6oe" target="_blank"><img src="https://asciinema.org/a/6u1Lec10CRGFqnXLDsfZ6S6oe.svg" /></a>
-<a href="https://asciinema.org/a/mIVA5xOcLDTEJ0nF3nuGpE8UT" target="_blank"><img src="https://asciinema.org/a/mIVA5xOcLDTEJ0nF3nuGpE8UT.svg" /></a>
+ 
+ ## About
+Difference Calculator is a program that determines the difference between two data structures.
+
+ ## Features:
+
+Support next file extensions: .yaml(.yml), .json.
+Multiple output formats (stylish, plain, default)
+ 
+ ## Minimum requirements
+
+ * Make utilite
+ * PHP >= 8.0
+ * Composer >= 2.4.1
+ 
+ 
+ ## Installation
+ 
+    Make install
+
+ ## Demonstration
+ <a href="https://asciinema.org/a/nKyIEadSUY4U3Fss2nMc8YTKT" target="_blank"><img src="https://asciinema.org/a/nKyIEadSUY4U3Fss2nMc8YTKT.svg" /></a>
