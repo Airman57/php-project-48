@@ -24,7 +24,7 @@ function parse(string $pathToFile)
         'json' => jsonToArray($pathToFile),
         'yaml' => yamlToArray($pathToFile),
         'yml' => yamlToArray($pathToFile),
-        default => throw new UnhandledMatchError,
+        'default' => throw new UnhandledMatchError,
     };
     return $resultArray;
 }
