@@ -12,8 +12,10 @@ function formatValue(mixed $value)
         return 'null';
     } elseif (is_bool($value)) {
         return $value ? 'true' : 'false';
-    } else {
+    } elseif (is_string($value)) {
         return "'$value'";
+    } else {
+        return $value;
     }
 }
 
