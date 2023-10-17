@@ -15,11 +15,10 @@ function valueToString(mixed $value)
 
 function toString(array $comparison)
 {
-    $result = array_map(function($value) {
+    $result = array_map(function ($value) {
         if (!is_array($value)) {
             return valueToString($value);
-        }
-        else {
+        } else {
             return toString($value);
         }
     }, $comparison);
@@ -28,48 +27,53 @@ function toString(array $comparison)
 
 function formatValue(mixed $value, $depth = 1)
 {
-  if (!is_array($value)) {
-    return $value;
-  }
-  $gap = str_repeat('    ', $depth);
-  $result = array_map(function($key, $node) use ($depth, $gap) {
-    $newValue = formatValue($node, $depth + 1);
-     return $gap . "    " . "$key: $newValue";    
-  }, array_keys($value), $value);
+    if (!is_array($value)) {
+        return $value;
+    }
+    $gap = str_repeat('    ', $depth);
+    $result = array_map(function ($key, $node) use ($depth, $gap) {
+        $newValue = formatValue($node, $depth + 1);
+        return $gap . "    " . "$key: $newValue";
+    }, array_keys($value), $value);
 
-   return "{\n" . implode("\n", $result) . "\n" . $gap . "}";  
+    return "{\n" . implode("\n", $result) . "\n" . $gap . "}";
 }
 
 function toStylish(array $comparison, $depth = 0)
 {
     $newcomparison = toString($comparison);
     $gap = str_repeat('    ', $depth);
-    $result = array_map(function($node) use ($depth, $gap) {
-      if($node['condition'] === 'changed') {
-        $newValue = formatValue($node['newValue'], $depth + 1);
-        $oldValue = formatValue($node['oldValue'], $depth + 1);
-        return $gap . "  - " . $node['key'] . ": " . $oldValue . "\n" .
-               $gap . "  + " . $node['key'] . ": " . $newValue;
-      }
-      elseif($node['condition'] === 'added') {
-        $value = formatValue($node['value'], $depth + 1);      
-        return $gap . "  + " . $node['key'] . ": " . $value;
-      }
-      elseif ($node['condition'] === 'array') {
-        $array = toStylish($node['children'], $depth + 1);
-        return $gap . "    " . $node['key'] . ": {\n$array\n$gap    }";
-      }
-      elseif ($node['condition'] === 'removed') {
-        $value = formatValue($node['value'], $depth + 1);
-        return $gap . "  - " . $node['key'] . ": " . $value;
-      }
-      elseif ($node['condition'] === 'unchanged') {
-        $value = formatValue($node['value'], $depth + 1);
-        return $gap . "    " . $node['key'] . ": " . $value;
-      }
-    },$newcomparison);
+    $result = array_map(function ($node) use ($depth, $gap) {
+        switch ($node['condition']) {
+            case 'changed':
+                $newValue = formatValue($node['newValue'], $depth + 1);
+                $oldValue = formatValue($node['oldValue'], $depth + 1);
+                return $gap . "  - " . $node['key'] . ": " . $oldValue . "\n" .
+                $gap . "  + " . $node['key'] . ": " . $newValue;
+
+            case 'added':
+                $value = formatValue($node['value'], $depth + 1);
+                return $gap . "  + " . $node['key'] . ": " . $value;
+
+            case 'array':
+                $array = toStylish($node['children'], $depth + 1);
+                return $gap . "    " . $node['key'] . ": {\n$array\n$gap    }";
+
+            case 'removed':
+                $value = formatValue($node['value'], $depth + 1);
+                return $gap . "  - " . $node['key'] . ": " . $value;
+
+            case 'unchanged':
+                $value = formatValue($node['value'], $depth + 1);
+                return $gap . "    " . $node['key'] . ": " . $value;
+
+            default:
+                throw new \Exception("Unknown node '{$node['condition']}'");
+        }
+    }, $newcomparison);
     return implode("\n", $result);
 }
+
 
 function showStylish(array $comparison)
 {

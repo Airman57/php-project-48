@@ -8,7 +8,7 @@
     "autoload": {
         "files":[ 
         "src/Differ.php",
-        "tests/genDiffTests.php",
+        "tests/genDiffTest.php",
         "src/Parser.php",
         "src/Formatters/stylish.php",
         "src/Formatters/plain.php",
