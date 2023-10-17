@@ -19,7 +19,7 @@ function formatValue(mixed $value)
     }
 }
 
-function toPlain(array $comparison, string $keysPath = "")
+function toPlain(array $comparison, string $keysPath)
 {
       $result = array_map(function ($node) use ($keysPath) {
         $path = $keysPath . $node['key'];
@@ -53,6 +53,6 @@ function toPlain(array $comparison, string $keysPath = "")
 
 function showPlain(array $comparison)
 {
-    $comparisonAsPlain = flatten(toPlain($comparison));
+    $comparisonAsPlain = flatten(toPlain($comparison, ""));
     return implode("\n", $comparisonAsPlain);
 }
