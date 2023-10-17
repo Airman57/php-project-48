@@ -20,10 +20,11 @@ function yamlToArray(string $pathToFile)
 function parse(string $pathToFile)
 {
     $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
-    $resultArray = match ((string) $extension) {
+    $resultArray = match ($extension) {
         'json' => jsonToArray($pathToFile),
         'yaml' => yamlToArray($pathToFile),
         'yml' => yamlToArray($pathToFile),
+        default => throw new UnhandledMatchError,
     };
     return $resultArray;
 }

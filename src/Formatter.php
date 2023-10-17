@@ -8,10 +8,11 @@ use function Differ\Formatters\Json\showJson;
 
 function showFormatted(array $comparison, string $formatName)
 {
-    $result = match ((string) $formatName) {
+    $result = match ($formatName) {
         'stylish' => showStylish($comparison),
         'plain' => showPlain($comparison),
         'json' => showJson($comparison),
+        default => throw new UnhandledMatchError,
     };
     return $result;
 }
