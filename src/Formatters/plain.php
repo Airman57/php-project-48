@@ -34,8 +34,8 @@ function toPlain(array $comparison, string $keysPath)
                 return "Property '$path' was added with value: $value";
 
             case 'array':
-                $path = $keysPath . $node['key'] . '.';
-                return toPlain($node['children'], $path);
+                $path2 = $path . '.';
+                return toPlain($node['children'], $path2);
 
             case 'removed':
                 $value = formatValue($node['value']);
