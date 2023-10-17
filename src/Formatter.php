@@ -12,7 +12,7 @@ function showFormatted(array $comparison, string $formatName)
         'stylish' => showStylish($comparison),
         'plain' => showPlain($comparison),
         'json' => showJson($comparison),
-        'foo'|'bar'=> 'wrong format',
+        default => 'wrong format',
     };
     return $result;
 }
