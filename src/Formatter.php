@@ -11,8 +11,7 @@ function showFormatted(array $comparison, string $formatName)
     $result = match ($formatName) {
         'stylish' => showStylish($comparison),
         'plain' => showPlain($comparison),
-        'json' => showJson($comparison),
-        'default' => throw new UnhandledMatchError,
+        'json' => showJson($comparison),        
     };
     return $result;
 }
