@@ -24,6 +24,7 @@ function parse(string $pathToFile)
         'json' => jsonToArray($pathToFile),
         'yaml' => yamlToArray($pathToFile),
         'yml' => yamlToArray($pathToFile),
+        default => 'wrong extension',
     };
     return $resultArray;
 }
