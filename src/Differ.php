@@ -4,8 +4,7 @@ namespace Differ\Differ;
 
 use function Functional\sort;
 use function Differ\Parser\parse;
-use function Differ\Formatters\showStylish;
-use function Differ\Formatters\toStylish;
+use function Differ\Formatter\showFormatted;
 
 function compare(array $file1, array $file2)
 {
@@ -13,7 +12,6 @@ function compare(array $file1, array $file2)
     $file2Keys = array_keys($file2);
     $keys = array_unique(array_merge($file1Keys, $file2Keys));
     $sortedKeys = sort($keys, fn($x, $y) => strcmp($x, $y));
-    //sort($keys);
     $result = array_map(function ($key) use ($file1, $file2) {
       if (!array_key_exists($key, $file1)) {
           return [
@@ -52,12 +50,10 @@ function compare(array $file1, array $file2)
 }
 
 
-function genDiff(string $file1, string $file2)
+function genDiff(string $file1, string $file2, $format = 'stylish')
 {
   $file1Array = parse($file1);
   $file2Array = parse($file2);  
   $difference = compare($file1Array, $file2Array);
-  return showStylish($difference);
+  return showFormatted($difference, $format);
 }
-
-//php match

@@ -6,20 +6,24 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use function Differ\Differ\genDiff;
 
 $doc = <<<DOC
+Generate diff.
+
 Usage:
-  gendiff (-h|--help)
-  gendiff (-v|--version)
-  gendiff [--format <fmt>] <firstFile> <secondFile>
+    gendiff (-h|--help)
+    gendiff (-v|--version)
+    gendiff [--format <fmt>] <firstFile> <secondFile>
+
 
 Options:
-  -h --help                     Show this screen
-  -v --version                  Show version
+  -h --help     Show this screen
+  --version     Show version
   --format <fmt>                Report format [default: stylish]
-
 DOC;
 
-$args = Docopt::handle($doc, ['version' => 'GenDiff 1.0']);
+$args = Docopt::handle($doc, array('version'=>'Naval Fate 2.0'));
+
 $file1 = $args['<firstFile>'];
 $file2 = $args['<secondFile>'];
-$format = $args['--format'];
-echo(genDiff($file1, $file2));
+$formatName = $args['--format'];
+
+print_r(genDiff($file1, $file2, $formatName));

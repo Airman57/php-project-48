@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Formatters;
+namespace Differ\Formatters\Stylish;
 
 function valueToString(mixed $value)
 {
