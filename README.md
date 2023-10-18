@@ -1,6 +1,7 @@
 [![Actions Status](https://github.com/Airman57/php-project-48/workflows/hexlet-check/badge.svg)](https://github.com/Airman57/php-project-48/actions)
 [![airman-check](https://github.com/Airman57/php-project-48/actions/workflows/airman-actions.check.yml/badge.svg)](https://github.com/Airman57/php-project-48/actions/workflows/airman-actions.check.yml)
 <a href="https://codeclimate.com/github/Airman57/php-project-48/maintainability"><img src="https://api.codeclimate.com/v1/badges/92374ff88d2faaed58d6/maintainability" /></a>
+<a href="https://codeclimate.com/github/Airman57/php-project-48/test_coverage"><img src="https://api.codeclimate.com/v1/badges/92374ff88d2faaed58d6/test_coverage" /></a>
  
  ## About
 Difference Calculator is a program that determines the difference between two data structures.
