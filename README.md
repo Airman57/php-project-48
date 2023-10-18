@@ -9,7 +9,7 @@ Difference Calculator is a program that determines the difference between two da
  ## Features:
 
  * Supported file's extensions: .yaml(.yml), .json
- * Multiple output formats (stylish, plain, default)
+ * Multiple output formats (stylish, plain, json)
  
  ## Minimum requirements
 
