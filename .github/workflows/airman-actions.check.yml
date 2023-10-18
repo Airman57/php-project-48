@@ -1,0 +1,35 @@
+name: airman-check
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install
+      run: make install
+
+    - name: Validate composer
+      run: make validate
+
+    - name: linter
+      run: make lint
+
+    - name: Tests
+      run: make test
+
+    - name: Test code coverage
+      uses: paambaati/codeclimate-action@v3.2.0
+      
+      with:
+        coverageCommand: make test-coverage
+        coverageLocations: ${{github.workplace}}/build/logs/clover.xml:clover
