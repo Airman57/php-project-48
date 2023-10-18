@@ -4,7 +4,15 @@
 <a href="https://codeclimate.com/github/Airman57/php-project-48/test_coverage"><img src="https://api.codeclimate.com/v1/badges/92374ff88d2faaed58d6/test_coverage" /></a>
  
  ## About
+
 Difference Calculator is a program that determines the difference between two data structures.
+
+ ## Usage
+
+    gendiff (-h|--help)
+    gendiff (-v|--version)
+    gendiff [--format <fmt>] <firstFile> <secondFile>
+
 
  ## Features:
 
@@ -24,4 +32,11 @@ Difference Calculator is a program that determines the difference between two da
     make install
 
  ## Demonstration
- <a href="https://asciinema.org/a/nKyIEadSUY4U3Fss2nMc8YTKT" target="_blank"><img src="https://asciinema.org/a/nKyIEadSUY4U3Fss2nMc8YTKT.svg" /></a>
+* Flat files comparison
+<a href="https://asciinema.org/a/83PbAc2PKNtAqlK9P2AV1Q2Jc" target="_blank"><img src="https://asciinema.org/a/83PbAc2PKNtAqlK9P2AV1Q2Jc.svg" /></a>
+
+* Recursive files comparison
+<a href="https://asciinema.org/a/bcCqirCPsvRvuKKvogmQE5udy" target="_blank"><img src="https://asciinema.org/a/bcCqirCPsvRvuKKvogmQE5udy.svg" /></a>
+
+* Recursive files comparison as plain output format
+<a href="https://asciinema.org/a/p2larSHV2iZhWmL8EnIuugQdq" target="_blank"><img src="https://asciinema.org/a/p2larSHV2iZhWmL8EnIuugQdq.svg" /></a>
