@@ -19,8 +19,9 @@ Multiple output formats (stylish, plain, default)
  
  
  ## Installation
- 
-    Make install
+    git clone git@github.com:Airman57/php-project-48.git
+    cd php-project-48
+    make install
 
  ## Demonstration
  <a href="https://asciinema.org/a/nKyIEadSUY4U3Fss2nMc8YTKT" target="_blank"><img src="https://asciinema.org/a/nKyIEadSUY4U3Fss2nMc8YTKT.svg" /></a>
