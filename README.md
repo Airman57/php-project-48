@@ -8,8 +8,8 @@ Difference Calculator is a program that determines the difference between two da
 
  ## Features:
 
-Support next file extensions: .yaml(.yml), .json.
-Multiple output formats (stylish, plain, default)
+   Supported file's extensions: .yaml(.yml), .json.
+   Multiple output formats (stylish, plain, default)
  
  ## Minimum requirements
 
