@@ -49,24 +49,19 @@ function toStylish(array $comparison, int $depth = 0)
                 $newValue = formatValue($node['newValue'], $depth + 1);
                 $oldValue = formatValue($node['oldValue'], $depth + 1);
                 return $gap . "  - " . $node['key'] . ": " . $oldValue . "\n" .
-                $gap . "  + " . $node['key'] . ": " . $newValue;
-
+                       $gap . "  + " . $node['key'] . ": " . $newValue;
             case 'added':
                 $value = formatValue($node['value'], $depth + 1);
                 return $gap . "  + " . $node['key'] . ": " . $value;
-
             case 'array':
                 $array = toStylish($node['children'], $depth + 1);
                 return $gap . "    " . $node['key'] . ": {\n$array\n$gap    }";
-
             case 'removed':
                 $value = formatValue($node['value'], $depth + 1);
                 return $gap . "  - " . $node['key'] . ": " . $value;
-
             case 'unchanged':
                 $value = formatValue($node['value'], $depth + 1);
                 return $gap . "    " . $node['key'] . ": " . $value;
-
             default:
                 throw new \Exception("Unknown node '{$node['condition']}'");
         }

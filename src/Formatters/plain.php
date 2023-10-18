@@ -28,22 +28,17 @@ function toPlain(array $comparison, string $keysPath)
                 $oldValue = formatValue($node['oldValue']);
                 $newValue = formatValue($node['newValue']);
                 return "Property '$path' was updated. From $oldValue to $newValue";
-
             case 'added':
                 $value = formatValue($node['value']);
                 return "Property '$path' was added with value: $value";
-
             case 'array':
                 $path2 = $path . '.';
                 return toPlain($node['children'], $path2);
-
             case 'removed':
                 $value = formatValue($node['value']);
                 return "Property '$path' was removed";
-
             case 'unchanged':
                 return [];
-
             default:
                 throw new \Exception("Unknown node '{$node['condition']}'");
         }
