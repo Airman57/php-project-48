@@ -1,4 +1,4 @@
 /vendor/
 /coverage-tests/
 /build/
-.phpunit.result.cache
+/.phpunit.result.cache
