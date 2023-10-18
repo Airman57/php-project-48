@@ -1,4 +1,4 @@
 /vendor/
 /coverage-tests/
-/build/
+/build/logs
 /.phpunit.result.cache
