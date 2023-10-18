@@ -41,7 +41,6 @@ function formatValue(mixed $value, int $depth = 1)
 
 function toStylish(array $comparison, int $depth = 0)
 {
-    $newComparison = toString($comparison);
     $gap = str_repeat('    ', $depth);
     $result = array_map(function ($node) use ($depth, $gap) {
         switch ($node['condition']) {
@@ -65,7 +64,7 @@ function toStylish(array $comparison, int $depth = 0)
             default:
                 throw new \Exception("Unknown node '{$node['condition']}'");
         }
-    }, $newComparison);
+    }, toString($comparison));
     return implode("\n", $result);
 }
 
