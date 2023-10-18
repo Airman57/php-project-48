@@ -48,7 +48,8 @@ function toStylish(array $comparison, int $depth = 0)
             case 'changed':
                 $newValue = formatValue($node['newValue'], $depth + 1);
                 $oldValue = formatValue($node['oldValue'], $depth + 1);
-                return $gap . "  - " . $node['key'] . ": " . $oldValue . "\n" . $gap . "  + " . $node['key'] . ": " . $newValue;
+                return $gap . "  - " . $node['key'] . ": " . $oldValue . "\n" .
+                       $gap . "  + " . $node['key'] . ": " . $newValue;
             case 'added':
                 $value = formatValue($node['value'], $depth + 1);
                 return $gap . "  + " . $node['key'] . ": " . $value;
