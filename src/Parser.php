@@ -3,7 +3,6 @@
 namespace Differ\Parser;
 
 use Exception;
-
 use Symfony\Component\Yaml\Yaml;
 
 function parse(string $pathToFile, string $extension)
