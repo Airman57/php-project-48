@@ -8,22 +8,74 @@ use function Differ\Differ\genDiff;
 
 class GenDiffTest extends TestCase
 {
-    public function testGenDiff()
+    /**
+    * @dataProvider provideGenDiffData
+    */
+    public function testGenDiff(string $expectedPath, string $file1Path, string $file2Path, string $format)
     {
-        $expected0 = file_get_contents('./tests/fixtures/CompareRecursiveStylish.txt');
-        $this->assertEquals($expected0, genDiff('./tests/fixtures/bigFile1.json', './tests/fixtures/bigFile2.json', 'stylish'));
-        $this->assertEquals($expected0, genDiff('./tests/fixtures/file1.yaml', './tests/fixtures/file2.yaml', 'stylish'));
-
-        $expected1 = file_get_contents('./tests/fixtures/CompareRecursivePlain.txt');
-        $this->assertEquals($expected1, genDiff('./tests/fixtures/bigFile1.json', './tests/fixtures/bigFile2.json', 'plain'));
-        $this->assertEquals($expected1, genDiff('./tests/fixtures/file1.yaml', './tests/fixtures/file2.yaml', 'plain'));
-
-        $expected2 = file_get_contents('./tests/fixtures/CompareRecursiveJson.txt');
-        $this->assertEquals($expected2, genDiff('./tests/fixtures/bigFile1.json', './tests/fixtures/bigFile2.json', 'json'));
-        $this->assertEquals($expected2, genDiff('./tests/fixtures/file1.yaml', './tests/fixtures/file2.yaml', 'json'));
-
-        $expected3 = file_get_contents('./tests/fixtures/Compare.txt');
-        $this->assertEquals($expected3, genDiff('./tests/fixtures/file1.json', './tests/fixtures/file2.json'));
-        $this->assertEquals($expected3, genDiff('./tests/fixtures/smallFile1.yml', './tests/fixtures/smallFile2.yml'));
+        $file1 = $this->getPath($file1Path);
+        $file2 = $this->getPath($file2Path);
+        $expected = $this->getPath($expectedPath);
+        $comparison = genDiff($file1, $file2, $format);
+        $this->assertStringEqualsFile($expected, $comparison);
     }
+
+    private function getPath(string $path)
+    {
+        return "tests/fixtures/" . $path;
+    }
+
+    public static function provideGenDiffData()
+    {
+        return [
+            'recursive json as stylish' => [
+                'expectedPath' => "CompareRecursiveStylish.txt",
+                'file1Path' => "bigFile1.json",
+                'file2Path' => "bigFile2.json",
+                'format' => "stylish"
+            ],
+            'recursive yaml as stylish' => [
+                'expectedPath' => "CompareRecursiveStylish.txt",
+                'file1Path' => "file1.yaml",
+                'file2Path' => "file2.yaml",
+                'format' => "stylish"
+            ],
+            'recursive json as plain' => [
+                'expectedPath' => "CompareRecursivePlain.txt",
+                'file1Path' => "bigFile1.json",
+                'file2Path' => "bigFile2.json",
+                'format' => "plain"
+            ],
+            'recursive yaml as plain' => [
+                'expectedPath' => "CompareRecursivePlain.txt",
+                'file1Path' => "file1.yaml",
+                'file2Path' => "file2.yaml",
+                'format' => "plain"
+            ],
+            'recursive json as json' => [
+                'expectedPath' => "CompareRecursiveJson.txt",
+                'file1Path' => "bigFile1.json",
+                'file2Path' => "bigFile2.json",
+                'format' => "json"
+            ],
+            'recursive yaml as json' => [
+                'expectedPath' => "CompareRecursiveJson.txt",
+                'file1Path' => "file1.yaml",
+                'file2Path' => "file2.yaml",
+                'format' => "json"
+            ],
+            'flat yml as stylish' => [
+                'expectedPath' => "Compare.txt",
+                'file1Path' => "smallFile1.yml",
+                'file2Path' => "smallFile2.yml",
+                'format' => "stylish"
+            ],
+            'flat json as stylish' => [
+                'expectedPath' => "Compare.txt",
+                'file1Path' => "file1.json",
+                'file2Path' => "file2.json",
+                'format' => "stylish"
+            ]
+        ];    
+    }       
 }

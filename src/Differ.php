@@ -28,11 +28,19 @@ function compare(array $file1, array $file2)
     return $result;
 }
 
+function getArray($pathToFile)
+{
+    $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
+    $string = file_get_contents($pathToFile);
+    $array = parse($string, $extension);
+    return $array;
+}
+
 
 function genDiff(string $file1, string $file2, string $format = 'stylish')
 {
-    $file1Array = parse($file1);
-    $file2Array = parse($file2);
+    $file1Array = getArray($file1);
+    $file2Array = getArray($file2);
     $difference = compare($file1Array, $file2Array);
     return showFormatted($difference, $format);
 }
