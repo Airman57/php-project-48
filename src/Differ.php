@@ -32,6 +32,9 @@ function getArray(string $pathToFile)
 {
     $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
     $string = file_get_contents($pathToFile);
+    if ($string === false) {
+        throw new \Exception("Unknown readfile error");
+    }
     $array = parse($string, $extension);
     return $array;
 }
