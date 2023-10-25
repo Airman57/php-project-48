@@ -76,6 +76,6 @@ class GenDiffTest extends TestCase
                 'file2Path' => "file2.json",
                 'format' => "stylish"
             ]
-        ];    
-    }       
+        ];
+    }
 }
