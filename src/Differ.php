@@ -28,7 +28,7 @@ function compare(array $file1, array $file2)
     return $result;
 }
 
-function getArray($pathToFile)
+function getArray(string $pathToFile)
 {
     $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
     $string = file_get_contents($pathToFile);
