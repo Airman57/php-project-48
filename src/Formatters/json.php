@@ -2,7 +2,7 @@
 
 namespace Differ\Formatters\Json;
 
-function showJson(array $diff)
+function showJson(array $comparison)
 {
-    return json_encode($diff, JSON_PRETTY_PRINT);
+    return json_encode($comparison, JSON_PRETTY_PRINT);
 }
