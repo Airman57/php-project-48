@@ -22,7 +22,7 @@ class GenDiffTest extends TestCase
 
     private function getPath(string $path)
     {
-        return "tests/fixtures/" . $path;
+        return __DIR__ . "/fixtures/" . $path;
     }
 
     public static function provideGenDiffData()

@@ -4,7 +4,7 @@ namespace Differ\Differ;
 
 use function Functional\sort;
 use function Differ\Parser\parse;
-use function Differ\Formatter\showFormatted;
+use function Differ\Formatter\makeFormatted;
 
 function compare(array $file1, array $file2)
 {
@@ -28,7 +28,7 @@ function compare(array $file1, array $file2)
     return $result;
 }
 
-function getArray(string $pathToFile)
+function convertToArray(string $pathToFile)
 {
     $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
     $string = file_get_contents($pathToFile);
@@ -42,8 +42,8 @@ function getArray(string $pathToFile)
 
 function genDiff(string $file1, string $file2, string $format = 'stylish')
 {
-    $file1Array = getArray($file1);
-    $file2Array = getArray($file2);
+    $file1Array = convertToArray($file1);
+    $file2Array = convertToArray($file2);
     $difference = compare($file1Array, $file2Array);
-    return showFormatted($difference, $format);
+    return makeFormatted($difference, $format);
 }
