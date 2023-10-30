@@ -1,17 +1,13 @@
 <?php
 
-namespace Differ\Formatter;
-
-use function Differ\Formatters\Stylish\showStylish;
-use function Differ\Formatters\Plain\showPlain;
-use function Differ\Formatters\Json\showJson;
+namespace Differ\Formatters;
 
 function makeFormatted(array $comparison, string $formatName)
 {
     return match ($formatName) {
-        'stylish' => showStylish($comparison),
-        'plain' => showPlain($comparison),
-        'json' => showJson($comparison),
+        'stylish' => Stylish\formatOutput($comparison),
+        'plain' => Plain\formatOutput($comparison),
+        'json' => Json\formatOutput($comparison),
         default => throw new \Exception("Unknown format"),
     };
 }

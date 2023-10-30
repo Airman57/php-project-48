@@ -46,7 +46,7 @@ function toPlain(array $comparison, string $keysPath)
     return $result;
 }
 
-function showPlain(array $comparison)
+function formatOutput(array $comparison)
 {
     $comparisonAsPlain = flatten(toPlain($comparison, ""));
     return implode("\n", $comparisonAsPlain);

@@ -69,7 +69,7 @@ function toStylish(array $comparison, int $depth = 0)
 }
 
 
-function showStylish(array $comparison)
+function formatOutput(array $comparison)
 {
     return "{\n" . toStylish($comparison) . "\n}";
 }

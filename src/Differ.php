@@ -4,7 +4,7 @@ namespace Differ\Differ;
 
 use function Functional\sort;
 use function Differ\Parser\parse;
-use function Differ\Formatter\makeFormatted;
+use function Differ\Formatters\makeFormatted;
 
 function compare(array $file1, array $file2)
 {
