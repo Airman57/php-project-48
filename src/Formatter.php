@@ -2,6 +2,8 @@
 
 namespace Differ\Formatters;
 
+use Exception;
+
 function makeFormatted(array $comparison, string $formatName)
 {
     return match ($formatName) {
