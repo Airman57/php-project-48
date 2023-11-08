@@ -12,7 +12,7 @@ function compare(array $file1, array $file2)
     $file2Keys = array_keys($file2);
     $keys = array_unique(array_merge($file1Keys, $file2Keys));
     $sortedKeys = sort($keys, fn($x, $y) => strcmp($x, $y));
-    $result = array_map(function ($key) use ($file1, $file2) {
+    return array_map(function ($key) use ($file1, $file2) {
         if (!array_key_exists($key, $file1)) {
             return ['key' => $key, 'condition' => 'added', 'value' => $file2[$key]];
         }
@@ -29,7 +29,6 @@ function compare(array $file1, array $file2)
             return ['key' => $key, 'condition' => 'unchanged', 'value' => $file1[$key]];
         }
     }, $sortedKeys);
-    return $result;
 }
 
 function convertToArray(string $pathToFile)
