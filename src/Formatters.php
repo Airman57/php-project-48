@@ -10,6 +10,6 @@ function makeFormatted(array $comparison, string $formatName)
         'stylish' => Stylish\formatOutput($comparison),
         'plain' => Plain\formatOutput($comparison),
         'json' => Json\formatOutput($comparison),
-        default => throw new \Exception("Unknown format"),
+        default => throw new Exception("Unknown format"),
     };
 }

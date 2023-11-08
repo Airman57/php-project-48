@@ -15,14 +15,13 @@ function valueToString(mixed $value)
 
 function toString(array $comparison)
 {
-    $result = array_map(function ($value) {
+    return array_map(function ($value) {
         if (!is_array($value)) {
             return valueToString($value);
         } else {
             return toString($value);
         }
     }, $comparison);
-    return $result;
 }
 
 function formatValue(mixed $value, int $depth = 1)

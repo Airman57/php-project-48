@@ -15,13 +15,17 @@ function compare(array $file1, array $file2)
     $result = array_map(function ($key) use ($file1, $file2) {
         if (!array_key_exists($key, $file1)) {
             return ['key' => $key, 'condition' => 'added', 'value' => $file2[$key]];
-        } elseif (!array_key_exists($key, $file2)) {
+
+        } if (!array_key_exists($key, $file2)) {
             return ['key' => $key, 'condition' => 'removed', 'value' => $file1[$key]];
-        } elseif (is_array($file1[$key]) && is_array($file2[$key])) {
+
+        } if (is_array($file1[$key]) && is_array($file2[$key])) {
             return ['key' => $key, 'condition' => 'array', 'children' => compare($file1[$key], $file2[$key])];
-        } elseif ($file1[$key] !== $file2[$key]) {
+
+        } if ($file1[$key] !== $file2[$key]) {
             return ['key' => $key, 'condition' => 'changed','oldValue' => $file1[$key], 'newValue' => $file2[$key]];
-        } else {
+            
+        } if ($file1[$key] == $file2[$key]) {
             return ['key' => $key, 'condition' => 'unchanged', 'value' => $file1[$key]];
         }
     }, $sortedKeys);
@@ -31,12 +35,12 @@ function compare(array $file1, array $file2)
 function convertToArray(string $pathToFile)
 {
     $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
+    
     $string = file_get_contents($pathToFile);
     if ($string === false) {
         throw new \Exception("Unknown readfile error");
     }
-    $array = parse($string, $extension);
-    return $array;
+    return parse($string, $extension);
 }
 
 

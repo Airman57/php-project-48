@@ -21,7 +21,7 @@ function formatValue(mixed $value)
 
 function toPlain(array $comparison, string $keysPath)
 {
-      $result = array_map(function ($node) use ($keysPath) {
+      return array_map(function ($node) use ($keysPath) {
         $path = $keysPath . $node['key'];
         switch ($node['condition']) {
             case 'changed':
@@ -43,7 +43,6 @@ function toPlain(array $comparison, string $keysPath)
                 throw new \Exception("Unknown node '{$node['condition']}'");
         }
       }, $comparison);
-    return $result;
 }
 
 function formatOutput(array $comparison)
